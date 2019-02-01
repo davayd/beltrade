@@ -1,5 +1,7 @@
 {
   "name": "icetrade_scanner",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }

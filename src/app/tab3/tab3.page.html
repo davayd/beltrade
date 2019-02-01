@@ -1,9 +1,23 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>
-      Tab Three
-    </ion-title>
-  </ion-toolbar>
+  <ion-toolbar> <ion-title> Настройки </ion-title> </ion-toolbar>
 </ion-header>
 
-<ion-content></ion-content>
+<ion-content>
+  <ng-container *ngIf="searchResult === 'loading'">
+    <p padding text-center><ion-spinner></ion-spinner></p>
+  </ng-container>
+  <ng-container *ngIf="searchResult === 'success'">
+    <ion-list>
+      <ion-item lines="none">
+        <ion-label><b>Острасль: {{selected}}</b></ion-label>
+        <ion-button slot="end" (click)="clearAll()">
+          Очистить
+        </ion-button>
+      </ion-item>
+      <ion-item *ngFor="let item of industryList">
+        <ion-label>{{ item.name }}</ion-label>
+        <ion-checkbox slot="end" [(ngModel)]="item.isChecked" (ionChange)="onChange(item)"></ion-checkbox>
+      </ion-item>
+    </ion-list>
+  </ng-container>
+</ion-content>
