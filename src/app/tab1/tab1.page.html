@@ -21,8 +21,14 @@
 </ion-header>
 
 <ion-content padding-top>
+  <div *ngIf="searchResult === 'idle'" class="container">
+    <ion-icon name="search" color="medium" class="search-large"></ion-icon>
+    <ion-text padding text-center no-margin color="medium">Начните поиск</ion-text>
+  </div>
   <ng-container *ngIf="searchResult === 'loading'">
-    <p padding text-center><ion-spinner></ion-spinner></p>
+    <p padding text-center>
+      <ion-spinner></ion-spinner>
+    </p>
   </ng-container>
   <ng-container *ngIf="tendersList.length">
     <ion-text color="dark" padding>
