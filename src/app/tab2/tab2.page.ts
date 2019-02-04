@@ -10,6 +10,7 @@ import { SocialSharing } from "@ionic-native/social-sharing/ngx";
 
 import * as moment from "moment";
 import "moment/locale/ru";
+import { ActionSheetController } from "@ionic/angular";
 
 @Component({
   selector: "app-tab2",
@@ -22,7 +23,8 @@ export class Tab2Page implements OnInit {
   constructor(
     @Inject(LOCAL_STORAGE) private storage: StorageService,
     private localNotifications: LocalNotifications,
-    private socialSharing: SocialSharing
+    private socialSharing: SocialSharing,
+    public actionSheetController: ActionSheetController
   ) {}
 
   ngOnInit() {
@@ -78,5 +80,25 @@ export class Tab2Page implements OnInit {
 
   openTender(item: TenderItem) {
     window.open(item.href, "_system", "location=yes");
+  }
+
+  async delete(item: TenderItem) {
+    const actionSheet = await this.actionSheetController.create({
+      buttons: [{
+        text: 'Удалить закладку',
+        role: 'destructive',
+        icon: 'trash',
+        cssClass: 'delete',
+        handler: () => {
+          this.favoriteTenders = this.favoriteTenders.filter(fav => fav.id !== item.id);
+          this.storage.set(FAVORITES_KEY, this.favoriteTenders);
+        }
+      }, {
+        text: 'Отмена',
+        icon: 'close-circle',
+        role: 'cancel'
+      }]
+    });
+    await actionSheet.present();
   }
 }

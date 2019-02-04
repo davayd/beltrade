@@ -2,9 +2,12 @@
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
-  line-height: 16px; /* fallback */
-  max-height: 48px; /* fallback */
-  -webkit-line-clamp: 3; /* number of lines to show */
+  line-height: 16px;
+  /* fallback */
+  max-height: 48px;
+  /* fallback */
+  -webkit-line-clamp: 3;
+  /* number of lines to show */
   -webkit-box-orient: vertical;
 }
 
@@ -14,14 +17,23 @@
 
 .offers-date {
   border-right: 1px solid #e2e2e2;
+
   p {
     font-size: 16px;
     margin: 5px 0;
     font-weight: normal;
     text-transform: uppercase;
+
     &:nth-child(2) {
       font-weight: bold;
       font-size: 26px;
     }
+  }
+}
+
+.delete {
+  color: var(--ion-color-danger);
+  ion-icon {
+      color: var(--ion-color-danger);
   }
 }

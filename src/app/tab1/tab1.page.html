@@ -1,18 +1,9 @@
 <ion-header>
   <ion-toolbar>
-    <ion-searchbar
-      placeholder="Введите текст для поиска"
-      animated
-      type="text"
-      [(ngModel)]="query"
-      (keydown.enter)="onSearch(query)"
-      (ionFocus)="showHistory = true"
-    ></ion-searchbar>
+    <ion-searchbar placeholder="Введите текст для поиска" animated type="text" [(ngModel)]="query" (keydown.enter)="onSearch(query)"
+      (ionFocus)="showHistory = true"></ion-searchbar>
     <ion-list *ngIf="showHistory && history.length > 0" no-margin>
-      <ion-item
-        *ngFor="let searchQuery of (history | reverse)"
-        (click)="onSearch(searchQuery)"
-      >
+      <ion-item *ngFor="let searchQuery of (history | reverse)" (click)="onSearch(searchQuery)">
         <ion-icon name="time" slot="start"></ion-icon>
         {{ searchQuery }}
       </ion-item>
@@ -53,17 +44,15 @@
           <ion-icon name="share-alt" color="medium"></ion-icon>
         </ion-button>
         <ion-button fill="clear" (click)="favorite(item)">
-          <ion-icon
-            *ngIf="!item.isFavorite"
-            name="star-outline"
-            color="medium"
-          ></ion-icon>
-          <ion-icon *ngIf="item.isFavorite" name="star"></ion-icon>
+          <ion-icon *ngIf="!item.isFavorite" name="star-outline" color="medium"></ion-icon>
+          <ion-icon *ngIf="item.isFavorite" name="star" color="warning"></ion-icon>
         </ion-button>
       </ion-row>
     </ion-card>
   </ng-container>
   <ng-container *ngIf="searchResult === 'error'">
-    <p padding text-center>Тендеры не найдены</p>
+    <ion-text text-center color="medium">
+      <p>Тендеры не найдены</p>
+    </ion-text>
   </ng-container>
 </ion-content>

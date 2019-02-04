@@ -1,8 +1,15 @@
 <ion-header>
-  <ion-toolbar> <ion-title> Закладки </ion-title> </ion-toolbar>
+  <ion-toolbar>
+    <ion-title> Закладки </ion-title>
+  </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <ng-container *ngIf="favoriteTenders?.length === 0">
+    <ion-text text-center color="medium">
+      <p>Закладок нет</p>
+    </ion-text>
+  </ng-container>
   <ion-list *ngIf="favoriteTenders?.length">
     <ion-card *ngFor="let item of favoriteTenders">
       <ion-row>
@@ -23,9 +30,9 @@
             <ion-button fill="clear" (click)="share(item)">
               <ion-icon name="share-alt" color="medium"></ion-icon>
             </ion-button>
-            <!-- <ion-button fill="clear">
-              <ion-icon name="heart"></ion-icon>
-            </ion-button> -->
+            <ion-button fill="clear" (click)="delete(item)">
+              <ion-icon name="trash" color="danger"></ion-icon>
+            </ion-button>
           </ion-row>
         </ion-col>
       </ion-row>
