@@ -3,16 +3,16 @@ import { RouterModule } from "@angular/router";
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { FormsModule } from "@angular/forms";
-import { Tab1Page } from "./tab1.page";
-import { ReversePipe } from "../reverse.pipe";
+import { HomePage } from "./home.page";
+import { ReversePipe } from "../../reverse.pipe";
 
 @NgModule({
   imports: [
     IonicModule,
     CommonModule,
     FormsModule,
-    RouterModule.forChild([{ path: "", component: Tab1Page }])
+    RouterModule.forChild([{ path: "", component: HomePage }])
   ],
-  declarations: [Tab1Page, ReversePipe]
+  declarations: [HomePage, ReversePipe]
 })
-export class Tab1PageModule {}
+export class HomePageModule {}

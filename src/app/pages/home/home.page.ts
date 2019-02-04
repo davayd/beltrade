@@ -6,18 +6,18 @@ import {
   CollectorService,
   FAVORITES_KEY,
   SEARCH_HISTORY_KEY
-} from "./../collector.service";
-import { TenderItem } from "../models";
+} from "./../../collector.service";
+import { TenderItem } from "../../models";
 import { SocialSharing } from "@ionic-native/social-sharing/ngx";
 import { Keyboard } from "@ionic-native/keyboard/ngx";
 import { Subscription } from "rxjs";
 
 @Component({
-  selector: "app-tab1",
-  templateUrl: "tab1.page.html",
-  styleUrls: ["tab1.page.scss"]
+  selector: "app-home",
+  templateUrl: "home.page.html",
+  styleUrls: ["home.page.scss"]
 })
-export class Tab1Page implements OnInit, OnDestroy {
+export class HomePage implements OnInit, OnDestroy {
   subscription: Subscription;
   tendersList: TenderItem[] = [];
   history: string[] = [];
@@ -102,7 +102,8 @@ export class Tab1Page implements OnInit, OnDestroy {
             offersTo: undefined,
             shortDescription: undefined,
             href: undefined,
-            isFavorite: false
+            isFavorite: false,
+            isNotified: false
           };
           // CELLS
           for (let cellId = 0; cellId < tableRow.cells.length; cellId++) {
