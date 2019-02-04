@@ -102,8 +102,7 @@ export class HomePage implements OnInit, OnDestroy {
             offersTo: undefined,
             shortDescription: undefined,
             href: undefined,
-            isFavorite: false,
-            isNotified: false
+            isFavorite: false
           };
           // CELLS
           for (let cellId = 0; cellId < tableRow.cells.length; cellId++) {
