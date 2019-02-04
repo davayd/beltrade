@@ -4,7 +4,7 @@ import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { FormsModule } from "@angular/forms";
 import { HomePage } from "./home.page";
-import { ReversePipe } from "../../reverse.pipe";
+import { ReversePipe } from "./../../core/pipes/reverse.pipe";
 
 @NgModule({
   imports: [

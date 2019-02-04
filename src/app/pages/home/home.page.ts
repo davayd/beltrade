@@ -6,8 +6,8 @@ import {
   CollectorService,
   FAVORITES_KEY,
   SEARCH_HISTORY_KEY
-} from "./../../collector.service";
-import { TenderItem } from "../../models";
+} from "./../../core/services/collector.service";
+import { TenderItem } from "./../../core/models/tender";
 import { SocialSharing } from "@ionic-native/social-sharing/ngx";
 import { Keyboard } from "@ionic-native/keyboard/ngx";
 import { Subscription } from "rxjs";

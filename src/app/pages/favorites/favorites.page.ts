@@ -1,7 +1,7 @@
 import { Component, Inject, OnInit } from "@angular/core";
 import { LOCAL_STORAGE, StorageService } from "angular-webstorage-service";
-import { TenderItem } from "../../models";
-import { FAVORITES_KEY } from "../../collector.service";
+import { TenderItem } from "../../core/models/tender";
+import { FAVORITES_KEY } from "../../core/services/collector.service";
 import {
   LocalNotifications,
   ELocalNotificationTriggerUnit
@@ -84,20 +84,25 @@ export class FavoritesPage implements OnInit {
 
   async delete(item: TenderItem) {
     const actionSheet = await this.actionSheetController.create({
-      buttons: [{
-        text: 'Удалить закладку',
-        role: 'destructive',
-        icon: 'trash',
-        cssClass: 'delete',
-        handler: () => {
-          this.favoriteTenders = this.favoriteTenders.filter(fav => fav.id !== item.id);
-          this.storage.set(FAVORITES_KEY, this.favoriteTenders);
+      buttons: [
+        {
+          text: "Удалить закладку",
+          role: "destructive",
+          icon: "trash",
+          cssClass: "delete",
+          handler: () => {
+            this.favoriteTenders = this.favoriteTenders.filter(
+              fav => fav.id !== item.id
+            );
+            this.storage.set(FAVORITES_KEY, this.favoriteTenders);
+          }
+        },
+        {
+          text: "Отмена",
+          icon: "close-circle",
+          role: "cancel"
         }
-      }, {
-        text: 'Отмена',
-        icon: 'close-circle',
-        role: 'cancel'
-      }]
+      ]
     });
     await actionSheet.present();
   }
