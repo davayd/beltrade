@@ -1,15 +1,15 @@
 import { Component, OnInit, Inject } from "@angular/core";
 import { HttpErrorResponse } from "@angular/common/http";
 import { LOCAL_STORAGE, StorageService } from "angular-webstorage-service";
-import { CollectorService, INDUSTRIES_KEY } from "./../collector.service";
-import { IndustryItem } from "../models";
+import { CollectorService, INDUSTRIES_KEY } from "./../../collector.service";
+import { IndustryItem } from "./../../models";
 
 @Component({
-  selector: "app-tab3",
-  templateUrl: "tab3.page.html",
-  styleUrls: ["tab3.page.scss"]
+  selector: "app-settings",
+  templateUrl: "settings.page.html",
+  styleUrls: ["settings.page.scss"]
 })
-export class Tab3Page implements OnInit {
+export class SettingsPage implements OnInit {
   searchResult = "idle";
   industryList: IndustryItem[] = [];
   selected = 0;
