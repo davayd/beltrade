@@ -1,40 +1,57 @@
-import { Component, ViewChild, OnInit, Inject } from "@angular/core";
+import { Component, ViewChild, OnInit, Inject, OnDestroy } from "@angular/core";
 import { IonSearchbar } from "@ionic/angular";
 import { HttpErrorResponse } from "@angular/common/http";
 import { StorageService, LOCAL_STORAGE } from "angular-webstorage-service";
-import { CollectorService, FAVORITES_KEY } from "./../collector.service";
+import {
+  CollectorService,
+  FAVORITES_KEY,
+  SEARCH_HISTORY_KEY
+} from "./../collector.service";
 import { TenderItem } from "../models";
 import { SocialSharing } from "@ionic-native/social-sharing/ngx";
+import { Keyboard } from "@ionic-native/keyboard/ngx";
+import { Subscription } from "rxjs";
 
 @Component({
   selector: "app-tab1",
   templateUrl: "tab1.page.html",
   styleUrls: ["tab1.page.scss"]
 })
-export class Tab1Page implements OnInit {
+export class Tab1Page implements OnInit, OnDestroy {
+  subscription: Subscription;
   tendersList: TenderItem[] = [];
+  history: string[] = [];
   searchResult = "idle";
+  showHistory = false;
+  query = "";
 
   @ViewChild(IonSearchbar) searchBar: IonSearchbar;
 
   constructor(
     private collectorService: CollectorService,
     @Inject(LOCAL_STORAGE) private storage: StorageService,
-    private socialSharing: SocialSharing
+    private socialSharing: SocialSharing,
+    private keyboard: Keyboard
   ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.history = this.storage.get(SEARCH_HISTORY_KEY) || [];
+    this.subscription = this.keyboard.onKeyboardHide().subscribe(event => {
+      this.searchBar.getInputElement().then(element => {
+        element.blur();
+        this.showHistory = false;
+      });
+    });
+  }
 
-  onInput(event: any) {
-    console.log(event.target.value);
-    const searchQuary: string = event.target.value;
-
-    if (searchQuary.trim().length) {
+  onSearch(historyItem: string) {
+    this.query = historyItem;
+    if (this.query.trim().length) {
       this.searchResult = "loading";
       this.tendersList = [];
 
       this.collectorService
-        .getAuctions(searchQuary)
+        .getAuctions(this.query)
         .then(result => {
           console.log(result);
           this.parseTable(result.data);
@@ -43,6 +60,19 @@ export class Tab1Page implements OnInit {
           console.log(error.message);
           this.searchResult = "error";
         });
+
+      this.keyboard.hide();
+      this.showHistory = false;
+
+      if (this.history.some(q => q === this.query)) {
+        return;
+      }
+
+      if (this.history.length === 5) {
+        this.history = this.history.slice(1, 5);
+      }
+      this.history.push(this.query);
+      this.storage.set(SEARCH_HISTORY_KEY, this.history);
     }
   }
 
@@ -180,5 +210,9 @@ export class Tab1Page implements OnInit {
     return favoriteTenders
       ? favoriteTenders.some(favorite => tenderId === favorite.id)
       : false;
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 }

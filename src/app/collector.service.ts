@@ -5,6 +5,7 @@ import { IndustryItem } from "./models";
 
 export const FAVORITES_KEY = "favorites";
 export const INDUSTRIES_KEY = "industries";
+export const SEARCH_HISTORY_KEY = "s_history";
 
 @Injectable({ providedIn: "root" })
 export class CollectorService {
@@ -40,7 +41,7 @@ export class CollectorService {
           temp.push(item.value);
         }
       });
-      return "&industries=" + temp.join("/");
     }
+    return "&industries=" + temp.join("/");
   }
 }

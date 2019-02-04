@@ -17,6 +17,9 @@
             <ion-card-subtitle class="short-desc">{{item.shortDescription}}</ion-card-subtitle>
           </ion-card-header>
           <ion-row justify-content-end>
+            <ion-button fill="clear" (click)="openTender(item)">
+              <ion-icon name="globe" color="medium"></ion-icon>
+            </ion-button>
             <ion-button fill="clear" (click)="share(item)">
               <ion-icon name="share-alt" color="medium"></ion-icon>
             </ion-button>

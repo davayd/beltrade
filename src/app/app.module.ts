@@ -12,8 +12,9 @@ import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 import { HttpClientModule } from "@angular/common/http";
 import { StorageServiceModule } from "angular-webstorage-service";
-import { SocialSharing } from '@ionic-native/social-sharing/ngx';
-import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
+import { SocialSharing } from "@ionic-native/social-sharing/ngx";
+import { LocalNotifications } from "@ionic-native/local-notifications/ngx";
+import { Keyboard } from "@ionic-native/keyboard/ngx";
 
 @NgModule({
   declarations: [AppComponent],
@@ -31,6 +32,7 @@ import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
     HTTP,
     SocialSharing,
     LocalNotifications,
+    Keyboard,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]

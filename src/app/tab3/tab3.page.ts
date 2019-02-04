@@ -36,7 +36,7 @@ export class Tab3Page implements OnInit {
           this.searchResult = "success";
         })
         .catch((error: HttpErrorResponse) => {
-          console.log(error.message);
+          console.error(error.message);
           this.searchResult = "error";
         });
     }
@@ -48,7 +48,7 @@ export class Tab3Page implements OnInit {
     const industriesList = <HTMLUListElement>(
       el.getElementsByTagName("ul").item(0)
     );
-    console.log(industriesList);
+    // console.log(industriesList);
     if (industriesList) {
       for (
         let categoryId = 0;
@@ -84,7 +84,7 @@ export class Tab3Page implements OnInit {
 
         this.industryList.push(industryItem);
       }
-      console.log(this.industryList);
+      // console.log(this.industryList);
       return this.industryList;
     } else {
       this.searchResult = "error";

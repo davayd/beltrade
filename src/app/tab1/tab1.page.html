@@ -4,9 +4,19 @@
       placeholder="Введите текст для поиска"
       animated
       type="text"
-      (keydown.enter)="onInput($event)"
-      value="Программное обеспечение"
+      [(ngModel)]="query"
+      (keydown.enter)="onSearch(query)"
+      (ionFocus)="showHistory = true"
     ></ion-searchbar>
+    <ion-list *ngIf="showHistory && history.length > 0" no-margin>
+      <ion-item
+        *ngFor="let searchQuery of (history | reverse)"
+        (click)="onSearch(searchQuery)"
+      >
+        <ion-icon name="time" slot="start"></ion-icon>
+        {{ searchQuery }}
+      </ion-item>
+    </ion-list>
   </ion-toolbar>
 </ion-header>
 
@@ -19,7 +29,7 @@
       <b>Всего: {{ tendersList.length }}</b>
     </ion-text>
     <ion-card *ngFor="let item of tendersList">
-      <ion-card-header (click)="openTender(item)">
+      <ion-card-header>
         <ion-badge color="primary">№ {{ item.id }}</ion-badge>
         <ion-card-title>{{ item.customerName }}</ion-card-title>
         <ion-card-subtitle>{{ item.shortDescription }}</ion-card-subtitle>
@@ -30,16 +40,19 @@
         <p><b>Предложения до: </b>{{ item.offersTo }}</p>
       </ion-card-content>
       <ion-row justify-content-end>
+        <ion-button fill="clear" (click)="openTender(item)">
+          <ion-icon name="globe" color="medium"></ion-icon>
+        </ion-button>
         <ion-button fill="clear" (click)="share(item)">
           <ion-icon name="share-alt" color="medium"></ion-icon>
         </ion-button>
         <ion-button fill="clear" (click)="favorite(item)">
           <ion-icon
             *ngIf="!item.isFavorite"
-            name="heart-empty"
+            name="star-outline"
             color="medium"
           ></ion-icon>
-          <ion-icon *ngIf="item.isFavorite" name="heart"></ion-icon>
+          <ion-icon *ngIf="item.isFavorite" name="star"></ion-icon>
         </ion-button>
       </ion-row>
     </ion-card>
