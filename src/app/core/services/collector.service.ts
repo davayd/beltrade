@@ -1,7 +1,7 @@
 import { Injectable, Inject } from "@angular/core";
 import { HTTP, HTTPResponse } from "@ionic-native/http/ngx";
 import { LOCAL_STORAGE, StorageService } from "angular-webstorage-service";
-import { IndustryItem } from "./models";
+import { IndustryItem } from "../models/industry";
 
 export const FAVORITES_KEY = "favorites";
 export const INDUSTRIES_KEY = "industries";

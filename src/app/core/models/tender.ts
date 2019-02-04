@@ -8,9 +8,3 @@ export interface TenderItem {
   href: string;
   isFavorite: boolean;
 }
-
-export interface IndustryItem {
-  name: string;
-  value: string;
-  isChecked: boolean;
-}

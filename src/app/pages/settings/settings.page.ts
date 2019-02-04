@@ -1,8 +1,8 @@
 import { Component, OnInit, Inject } from "@angular/core";
 import { HttpErrorResponse } from "@angular/common/http";
 import { LOCAL_STORAGE, StorageService } from "angular-webstorage-service";
-import { CollectorService, INDUSTRIES_KEY } from "./../../collector.service";
-import { IndustryItem } from "./../../models";
+import { CollectorService, INDUSTRIES_KEY } from "./../../core/services/collector.service";
+import { IndustryItem } from "./../../core/models/industry";
 
 @Component({
   selector: "app-settings",
